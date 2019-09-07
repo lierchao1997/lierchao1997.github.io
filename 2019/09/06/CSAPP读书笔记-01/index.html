@@ -35,7 +35,7 @@
     fancybox: false,
     mediumzoom: false,
     lazyload: false,
-    pangu: false,
+    pangu: true,
     algolia: {
       appID: '',
       apiKey: '',
@@ -412,7 +412,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>3 分钟</span>
+              <span>7 分钟</span>
             </span>
           
 
@@ -432,7 +432,6 @@
 <p>ISBN 978-7-111-54493-7</p>
 </blockquote>
 <a id="more"></a>
-
 <h2 id="信息-位-上下文"><a href="#信息-位-上下文" class="headerlink" title="信息 = 位 + 上下文"></a>信息 = 位 + 上下文</h2><h3 id="一切皆比特"><a href="#一切皆比特" class="headerlink" title="一切皆比特"></a>一切皆比特</h3><p>CSAPP 开篇就提到一个概念：信息 = 位 + 上下文</p>
 <p>在计算机内部，“<strong>一切皆比特</strong>”，所有信息都以二进制序列的形式存储、传输、处理和表示，但同样是二进制序列，在不同的情境下就有不同的解释方法。比如同样是四字节二进制序列，可以解释为一个整数，也可以解释为四个ASCII码表示的字符；既可以是某个具体的32位机器指令，又可以是待处理的浮点数……</p>
 <p>所谓“读到这些数据对象时的<strong>上下文</strong>”，实际上就是指的这些二进制序列被呈现时的<strong>具体情境</strong>，是被处理的数值，还是待执行的指令，抑或是要传输的字符，“信息”的意义并不取决于二进制序列本身长什么样，而更多地依赖于它在什么情况下被解释。</p>
@@ -459,7 +458,6 @@
 <p>这个部分只是想尝试一下 mermaid 画图功能强行加的</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[预处理器]</span><br><span class="line">B[编译器]</span><br><span class="line">C[汇编器]</span><br><span class="line">D[链接器]</span><br><span class="line">a&#123;hello.c&#125;</span><br><span class="line">d&#123;hello&#125;</span><br><span class="line">a--&gt;A</span><br><span class="line">A--&quot;hello.i&quot;--&gt;B</span><br><span class="line">B--&quot;hello.s&quot;--&gt;C</span><br><span class="line">C--&quot;hello.o&quot;--&gt;D</span><br><span class="line">D--&gt;d</span><br></pre></td></tr></table></figure>
-
 <h2 id="系统的硬件组成"><a href="#系统的硬件组成" class="headerlink" title="系统的硬件组成"></a>系统的硬件组成</h2><h3 id="1-总线"><a href="#1-总线" class="headerlink" title="1. 总线"></a>1. 总线</h3><p>注意区分”字（word）“和”字节（byte）“。</p>
 <p>一个“字”可能包含多个字节，“字长”即一个字中的字节数。字的具体大小应该是与处理器位数相关。</p>
 <h3 id="2-I-O-设备"><a href="#2-I-O-设备" class="headerlink" title="2. I/O 设备"></a>2. I/O 设备</h3><p>硬盘也是 I/O 设备的一种，但主存（即内存）不是。（存疑）</p>
@@ -637,7 +635,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -650,7 +648,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -663,7 +661,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -711,6 +709,18 @@
   </div>
 
 
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://co5.me/" title="https://co5.me/" rel="noopener" target="_blank">Loveconvert</a>
+        </li>
+      
+    </ul>
+  </div>
 
       </div>
 
@@ -735,14 +745,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">6k</span>
+    <span title="站点总字数">10k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">6 分钟</span>
+    <span title="站点阅读时长">18 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
@@ -882,10 +892,13 @@
   
 
 
-  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/anime.min.js?v=3.1.0"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
 <script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
 <script src="/js/schemes/pisces.js?v=7.4.0"></script>
 <script src="/js/next-boot.js?v=7.4.0"></script><script src="/js/bookmark.js?v=7.4.0"></script>
@@ -915,6 +928,8 @@
 
 
 
+
+  
 
   
 
