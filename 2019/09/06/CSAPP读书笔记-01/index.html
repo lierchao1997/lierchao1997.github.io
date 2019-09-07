@@ -4,7 +4,7 @@
 
 
 
-<html lang="zh-CN">
+<html lang="zh-CN,en,default">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -55,19 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="《深入理解计算机系统》读书笔记-01 《深入理解计算机系统（原书第 3 版）》 英文版简称CS: APP 2017 年 12 月第 1 版第 6 次印刷 ISBN 978-7-111-54493-7  信息 = 位 + 上下文一切皆比特CSAPP 开篇就提到一个概念：信息 = 位 + 上下文 在计算机内部，“一切皆比特”，所有信息都以二进制序列的形式存储、传输、处理和表示，但同样是二进制序列，在不">
-<meta name="keywords" content="读书笔记, 计算机基础知识">
+  <meta name="description" content="《深入理解计算机系统》读书笔记-01 《深入理解计算机系统（原书第 3 版）》 英文版简称CS: APP 2017 年 12 月第 1 版第 6 次印刷 ISBN 978-7-111-54493-7">
+<meta name="keywords" content="读书笔记,计算机基础知识">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CSAPP读书笔记-01">
-<meta property="og:url" content="http://yoursite.com/2019/09/06/CSAPP读书笔记-01/index.html">
+<meta property="og:url" content="http://lierchao.com/2019/09/06/CSAPP读书笔记-01/index.html">
 <meta property="og:site_name" content="Learn">
-<meta property="og:description" content="《深入理解计算机系统》读书笔记-01 《深入理解计算机系统（原书第 3 版）》 英文版简称CS: APP 2017 年 12 月第 1 版第 6 次印刷 ISBN 978-7-111-54493-7  信息 = 位 + 上下文一切皆比特CSAPP 开篇就提到一个概念：信息 = 位 + 上下文 在计算机内部，“一切皆比特”，所有信息都以二进制序列的形式存储、传输、处理和表示，但同样是二进制序列，在不">
+<meta property="og:description" content="《深入理解计算机系统》读书笔记-01 《深入理解计算机系统（原书第 3 版）》 英文版简称CS: APP 2017 年 12 月第 1 版第 6 次印刷 ISBN 978-7-111-54493-7">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-07T01:26:37.398Z">
+<meta property="og:updated_time" content="2019-09-07T04:25:14.686Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSAPP读书笔记-01">
-<meta name="twitter:description" content="《深入理解计算机系统》读书笔记-01 《深入理解计算机系统（原书第 3 版）》 英文版简称CS: APP 2017 年 12 月第 1 版第 6 次印刷 ISBN 978-7-111-54493-7  信息 = 位 + 上下文一切皆比特CSAPP 开篇就提到一个概念：信息 = 位 + 上下文 在计算机内部，“一切皆比特”，所有信息都以二进制序列的形式存储、传输、处理和表示，但同样是二进制序列，在不">
-  <link rel="canonical" href="http://yoursite.com/2019/09/06/CSAPP读书笔记-01/">
+<meta name="twitter:description" content="《深入理解计算机系统》读书笔记-01 《深入理解计算机系统（原书第 3 版）》 英文版简称CS: APP 2017 年 12 月第 1 版第 6 次印刷 ISBN 978-7-111-54493-7">
+  <link rel="canonical" href="http://lierchao.com/2019/09/06/CSAPP读书笔记-01/">
 
 
 <script id="page-configurations">
@@ -83,14 +83,14 @@
 
   <title>CSAPP读书笔记-01 | Learn</title>
   
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-147263392-1"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=147263392-1"></script>
   <script>
     var host = window.location.hostname;
     if (host !== "localhost" || !true) {
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'UA-147263392-1');
+      gtag('config', '147263392-1');
     }
   </script>
 
@@ -183,17 +183,6 @@
       
       
         
-        <li class="menu-item menu-item-about">
-      
-    
-
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
-
-  </li>
-      
-      
-      
-        
         <li class="menu-item menu-item-tags">
       
     
@@ -221,6 +210,17 @@
     
 
     <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
 
   </li>
       
@@ -265,7 +265,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/06/CSAPP读书笔记-01/">
+    <link itemprop="mainEntityOfPage" href="http://lierchao.com/2019/09/06/CSAPP读书笔记-01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="轩辕御龙">
@@ -304,12 +304,61 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-07 09:26:37" itemprop="dateModified" datetime="2019-09-07T09:26:37+08:00">2019-09-07</time>
+                <time title="修改时间：2019-09-07 12:25:14" itemprop="dateModified" datetime="2019-09-07T12:25:14+08:00">2019-09-07</time>
               </span>
             
           
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/基础知识/" itemprop="url" rel="index"><span itemprop="name">基础知识</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/读书笔记/" itemprop="url" rel="index"><span itemprop="name">读书笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
+            <span id="/2019/09/06/CSAPP读书笔记-01/" class="post-meta-item leancloud_visitors" data-flag-title="CSAPP读书笔记-01" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2019/09/06/CSAPP读书笔记-01/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/09/06/CSAPP读书笔记-01/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -326,6 +375,8 @@
 <p>2017 年 12 月第 1 版第 6 次印刷</p>
 <p>ISBN 978-7-111-54493-7</p>
 </blockquote>
+<a id="more"></a>
+
 <h2 id="信息-位-上下文"><a href="#信息-位-上下文" class="headerlink" title="信息 = 位 + 上下文"></a>信息 = 位 + 上下文</h2><h3 id="一切皆比特"><a href="#一切皆比特" class="headerlink" title="一切皆比特"></a>一切皆比特</h3><p>CSAPP 开篇就提到一个概念：信息 = 位 + 上下文</p>
 <p>在计算机内部，“<strong>一切皆比特</strong>”，所有信息都以二进制序列的形式存储、传输、处理和表示，但同样是二进制序列，在不同的情境下就有不同的解释方法。比如同样是四字节二进制序列，可以解释为一个整数，也可以解释为四个ASCII码表示的字符；既可以是某个具体的32位机器指令，又可以是待处理的浮点数……</p>
 <p>所谓“读到这些数据对象时的<strong>上下文</strong>”，实际上就是指的这些二进制序列被呈现时的<strong>具体情境</strong>，是被处理的数值，还是待执行的指令，抑或是要传输的字符，“信息”的意义并不取决于二进制序列本身长什么样，而更多地依赖于它在什么情况下被解释。</p>
@@ -411,6 +462,22 @@
     
         
       
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>轩辕御龙</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://lierchao.com/2019/09/06/CSAPP读书笔记-01/" title="CSAPP读书笔记-01">http://lierchao.com/2019/09/06/CSAPP读书笔记-01/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN,en" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
 
       <footer class="post-footer">
           
@@ -418,7 +485,9 @@
           
           <div class="post-tags">
             
-              <a href="/tags/读书笔记-计算机基础知识/" rel="tag"># 读书笔记, 计算机基础知识</a>
+              <a href="/tags/读书笔记/" rel="tag"># 读书笔记</a>
+            
+              <a href="/tags/计算机基础知识/" rel="tag"># 计算机基础知识</a>
             
           </div>
         
@@ -428,8 +497,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/09/06/test-my-site/" rel="next" title="test_my_site">
-                  <i class="fa fa-chevron-left"></i> test_my_site
+                <a href="/2019/09/06/hello-world/" rel="next" title="Hello World">
+                  <i class="fa fa-chevron-left"></i> Hello World
                 </a>
               
             </div>
@@ -454,6 +523,15 @@
 
           </div>
           
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
 
         </div>
           
@@ -503,8 +581,21 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
         </a>
       </div>
     
@@ -512,9 +603,13 @@
       
       <div class="site-state-item site-state-tags">
         
-        <span class="site-state-item-count">1</span>
-        <span class="site-state-item-name">标签</span>
+          
+            <a href="/tags/">
+          
         
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
       </div>
     
   </nav>
@@ -553,6 +648,11 @@
       </span>
     
   </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN,en" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
 
 
 
@@ -568,7 +668,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -585,6 +685,100 @@
 
 
 
+  
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+            
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=ImOxfDkKUlhBCQtCl8nMjz41-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'ImOxfDkKUlhBCQtCl8nMjz41-gzGzoHsz',
+            'X-LC-Key': 'RQzFJDyFGdvbNJhw94qpplfL',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
 
 
 
@@ -599,9 +793,7 @@
   
 
 
-    
-  
-  <script color='0,0,255' opacity='0.7' zIndex='-2' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
   <script src="/lib/anime.min.js?v=3.1.0"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
@@ -638,6 +830,38 @@
   
 
   
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://lierchao.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function disqus_config() {
+    this.page.url = "http://lierchao.com/2019/09/06/CSAPP读书笔记-01/";
+    this.page.identifier = "2019/09/06/CSAPP读书笔记-01/";
+    this.page.title = 'CSAPP读书笔记-01';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://lierchao.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    window.addEventListener('load', loadComments, false);
+  
+</script>
 
 </body>
 </html>
