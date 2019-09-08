@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lierchao.com/"/>
-  <updated>2019-09-08T15:08:31.303Z</updated>
+  <updated>2019-09-08T16:06:51.945Z</updated>
   <id>http://lierchao.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CSAPP读书笔记-02</title>
+    <link href="http://lierchao.com/2019/09/09/CSAPP%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-02/"/>
+    <id>http://lierchao.com/2019/09/09/CSAPP读书笔记-02/</id>
+    <published>2019-09-08T16:05:54.000Z</published>
+    <updated>2019-09-08T16:06:51.945Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="CSAPP读书笔记-02"><a href="#CSAPP读书笔记-02" class="headerlink" title="CSAPP读书笔记-02"></a>CSAPP读书笔记-02</h1><h2 id="浮点数陷阱"><a href="#浮点数陷阱" class="headerlink" title="浮点数陷阱"></a>浮点数陷阱</h2><p>在第二章最初，给出了“浮点运算是不可结合的”这样一个结论，乍一看有点令人费解，但仔细看了看例子，发现其实结合浮点数在内存中的存储方式反而很容易理解，不过就是这种表达很容易让人误会，颇不可取。</p><p>实际上由于浮点数在内存中存储时，计算机存储的是它的尾数，因此在一个数的基础上，给它加上或者减去太小的浮点值，都会导致最终产生截断，表现出来就是“什么也没有发生”的效果。</p><a id="more"></a><p>书中提到的：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">3.14</span> + <span class="number">1e20</span>)<span class="number">-1e20</span></span><br></pre></td></tr></table></figure><p>正是这样一个例子。</p><p>其中的<code>1e20</code>远大于<code>3.14</code>，于是实际发生的事情就是<code>(3.14+1e20)</code>所得的结果为<code>1e20</code>，再减去<code>1e20</code>，于是就得到了看起来很不合理的<code>0</code>。因此在使用浮点数的时候一定要注意精度的问题。</p><p>如果一定要在跨度很大的范围内进行浮点数运算，最好将同一优先级下，数值范围相近的操作数先运算。</p><h2 id="“虚拟内存”的抽象"><a href="#“虚拟内存”的抽象" class="headerlink" title="“虚拟内存”的抽象"></a>“虚拟内存”的抽象</h2><blockquote><p>大多数计算机的最小可寻址内存单位就是“<strong style="color: blue">字节</strong>”。</p><p>机器级程序将内存视为一个非常大的字节数组，称为<strong>虚拟内存</strong>。</p></blockquote><p>这里又复习了一下第一章提到的“抽象”概念，所谓“虚拟内存”，就是对主存和I/O设备的抽象。并且这段话还具体讲了一下“虚拟内存” 抽象的方式，使得这个抽象概念更加明晰。</p><blockquote><p>每台计算机都有一个<strong style="color: blue">字长</strong>（word size），指明指针数据的标称大小。</p></blockquote><p>这里的“字长”可以比较“字节”的概念。“字长”并不等于“字节”，一个“字”可能包含多个字节，并且是取决于机器的位数的。</p><p>所谓“指针数据的标称大小”，我的理解就是在这台机器上存储某个虚拟内存地址的指针变量的位数。更进一步说，应该就是PC寄存器（程序计数器）的大小，因此PC寄存器的大小（也就是“字长”）限制了计算机的最大寻址范围，超出“字长”所能表示的最大值的虚拟内存地址对计算机来说是没有意义的。</p><p>并且还要注意的是，编译结果的二进制程序是32位还是64位并不取决于机器，而是取决于具体使用的编译器和编译方式。</p><h2 id="大端法和小端法"><a href="#大端法和小端法" class="headerlink" title="大端法和小端法"></a>大端法和小端法</h2><p>之前忘记在哪儿看到过关于大端法和小端法的描述，但因为毕竟不是CS专业，了解了一下也没有记住，今天看书的时候倒是认真推敲了一下，发现了一些有趣的东西，也对这两种存储顺序有了更深的理解和记忆。</p><blockquote><p>最低有效位在最前面的（存储）方式，称为<strong>小端法</strong>（little endian）</p><p>最高有效位在最前面的（存储）方式，称为<strong>大端法</strong>（big endian）</p></blockquote><p>其实按人类的正常思维和书写习惯，很显然大端法是一种更加自然的方式，但却很少被采用，连两种主流的移动端操作系统都没落着；而小端法则是一种更加符合逻辑的存储顺序，可能也更加适合在计算机当中表达。</p><p>说是这么说，但实际上转念一想，为什么大端法存储顺序就更贴近人的思维了呢？其实就连在书面上表达的时候，将内存单元按地址增大的顺序从左往右排列也不过是人为规定的而已；对计算机来说，地址的高位、低位并不存在左右之别，反而将低字节放在低地址更便于机器操作。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;CSAPP读书笔记-02&quot;&gt;&lt;a href=&quot;#CSAPP读书笔记-02&quot; class=&quot;headerlink&quot; title=&quot;CSAPP读书笔记-02&quot;&gt;&lt;/a&gt;CSAPP读书笔记-02&lt;/h1&gt;&lt;h2 id=&quot;浮点数陷阱&quot;&gt;&lt;a href=&quot;#浮点数陷阱&quot; class=&quot;headerlink&quot; title=&quot;浮点数陷阱&quot;&gt;&lt;/a&gt;浮点数陷阱&lt;/h2&gt;&lt;p&gt;在第二章最初，给出了“浮点运算是不可结合的”这样一个结论，乍一看有点令人费解，但仔细看了看例子，发现其实结合浮点数在内存中的存储方式反而很容易理解，不过就是这种表达很容易让人误会，颇不可取。&lt;/p&gt;
+&lt;p&gt;实际上由于浮点数在内存中存储时，计算机存储的是它的尾数，因此在一个数的基础上，给它加上或者减去太小的浮点值，都会导致最终产生截断，表现出来就是“什么也没有发生”的效果。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="计算机" scheme="http://lierchao.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+      <category term="基础知识" scheme="http://lierchao.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="读书笔记" scheme="http://lierchao.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="读书笔记" scheme="http://lierchao.com/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="计算机基础知识" scheme="http://lierchao.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+  </entry>
   
   <entry>
     <title>执行 hexo d 命令时出现的ERROR Deployer not found 错误</title>
@@ -588,37 +618,6 @@
 &lt;p&gt;谁人敢比天?&lt;/p&gt;
 &lt;p&gt;唯我酒中仙！&lt;/p&gt;
 
-      
-    
-    </summary>
-    
-    
-      <category term="轩辕诗集" scheme="http://lierchao.com/categories/%E8%BD%A9%E8%BE%95%E8%AF%97%E9%9B%86/"/>
-    
-    
-      <category term="文学" scheme="http://lierchao.com/tags/%E6%96%87%E5%AD%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>轩辕游</title>
-    <link href="http://lierchao.com/2009/08/22/%E8%BD%A9%E8%BE%95%E6%B8%B8/"/>
-    <id>http://lierchao.com/2009/08/22/轩辕游/</id>
-    <published>2009-08-22T14:10:15.000Z</published>
-    <updated>2019-09-07T04:46:24.157Z</updated>
-    
-    <content type="html"><![CDATA[<p>乾者，天也；坤者，地也；中间者，轩辕也</p><p>龙藏虎卧中华风，雄狮抖擞华夏宏。</p><p>滔滔长江与黄河，终得育我炎黄龙。</p><p>中华圣光耀洪荒，混沌大千天地同。</p><p>不论夏冬草与虫，每遇风雨欲腾龙。</p><p>蚩尤战败于涿鹿，人间是非转头空。</p><p>乾坤八卦蕴天数，天地正气贯长虹。</p><p>轩辕剑斩蚩玄魔，浩然永存混沌中。</p><p>一朝风雨漫天来，轩辕御龙腾长空！</p><p>——振我中华民族，兴我轩辕遗风！</p><p>我以我血荐轩辕！</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;乾者，天也；坤者，地也；中间者，轩辕也&lt;/p&gt;
-&lt;p&gt;龙藏虎卧中华风，雄狮抖擞华夏宏。&lt;/p&gt;
-&lt;p&gt;滔滔长江与黄河，终得育我炎黄龙。&lt;/p&gt;
-&lt;p&gt;中华圣光耀洪荒，混沌大千天地同。&lt;/p&gt;
-&lt;p&gt;不论夏冬草与虫，每遇风雨欲腾龙。&lt;/p&gt;
-&lt;p&gt;蚩尤战败于涿鹿，人间是非转头
       
     
     </summary>
