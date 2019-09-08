@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lierchao.com/"/>
-  <updated>2019-09-08T15:07:16.760Z</updated>
+  <updated>2019-09-08T15:08:31.303Z</updated>
   <id>http://lierchao.com/</id>
   
   <author>
@@ -21,16 +21,13 @@
     <link href="http://lierchao.com/2019/09/08/%E6%89%A7%E8%A1%8C-hexo-d-%E5%91%BD%E4%BB%A4%E6%97%B6/"/>
     <id>http://lierchao.com/2019/09/08/执行-hexo-d-命令时/</id>
     <published>2019-09-08T15:02:49.000Z</published>
-    <updated>2019-09-08T15:07:16.760Z</updated>
+    <updated>2019-09-08T15:08:31.303Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="执行hexo-d命令时出现的ERROR-Deployer-not-found-git错误"><a href="#执行hexo-d命令时出现的ERROR-Deployer-not-found-git错误" class="headerlink" title="执行hexo d命令时出现的ERROR Deployer not found: git错误"></a>执行<code>hexo d</code>命令时出现的ERROR Deployer not found: git错误</h1><h2 id="具体问题"><a href="#具体问题" class="headerlink" title="具体问题"></a>具体问题</h2><p>前两天折腾博客时，在静态页面生成完成之后要部署到GitHub上时遇到了<code>ERROR Deployer not found: git</code>的问题。</p><p>但是奇怪的是我都是按照文档一步步设置的，其中博客根目录中的配置文件<code>_config.yml</code>中写入了如下内容：</p><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span> <span class="attr">https://github.com/lierchao1997/lierchao1997.github.io.git</span> <span class="comment">#https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span> <span class="comment">#published</span></span><br></pre></td></tr></table></figure><p>同时也执行相应命令安装了相应的插件：</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure><p>但在执行<code>hexo d</code>命令的过程中却遇到了上述问题。</p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>最后发现是因为在安装插件时“当前工作目录”不在博客根目录下，所以<code>hexo</code>没有找到这个插件。注意此处的“<strong>博客根目录</strong>”。不是创建博客文件夹时所在的文件夹，而是执行命令<code>hexo init [博客文件夹]</code>时指定的<code>[博客文件夹]</code>。</p><p>要执行<code>cd [博客文件夹]</code>，将命令行当前目录跳转到为博客创建的新文件夹中去，并且保持这个路径不要再进入下一级目录。此时再来执行插件安装命令，即可正确安装相应插件。</p><p>到这里，再执行<code>hexo d</code>命令即可正确部署静态页面。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="执行hexo-d命令时出现的ERROR-Deployer-not-found-git错误"><a href="#执行hexo-d命令时出现的ERROR-Deployer-not-found-git错误" class="headerlink" title="执行hexo d命令时出现的ERROR Deployer not found: git错误"></a>执行<code>hexo d</code>命令时出现的ERROR Deployer not found: git错误</h1><h2 id="具体问题"><a href="#具体问题" class="headerlink" title="具体问题"></a>具体问题</h2><p>前两天折腾博客时，在静态页面生成完成之后要部署到GitHub上时遇到了<code>ERROR Deployer not found: git</code>的问题。</p><a id="more"></a><p>但是奇怪的是我都是按照文档一步步设置的，其中博客根目录中的配置文件<code>_config.yml</code>中写入了如下内容：</p><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span> <span class="attr">https://github.com/lierchao1997/lierchao1997.github.io.git</span> <span class="comment">#https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span> <span class="comment">#published</span></span><br></pre></td></tr></table></figure><p>同时也执行相应命令安装了相应的插件：</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure><p>但在执行<code>hexo d</code>命令的过程中却遇到了上述问题。</p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>最后发现是因为在安装插件时“当前工作目录”不在博客根目录下，所以<code>hexo</code>没有找到这个插件。注意此处的“<strong>博客根目录</strong>”。不是创建博客文件夹时所在的文件夹，而是执行命令<code>hexo init [博客文件夹]</code>时指定的<code>[博客文件夹]</code>。</p><p>要执行<code>cd [博客文件夹]</code>，将命令行当前目录跳转到为博客创建的新文件夹中去，并且保持这个路径不要再进入下一级目录。此时再来执行插件安装命令，即可正确安装相应插件。</p><p>到这里，再执行<code>hexo d</code>命令即可正确部署静态页面。</p>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;h1 id=&quot;执行hexo-d命令时出现的ERROR-Deployer-not-found-git错误&quot;&gt;&lt;a href=&quot;#执行hexo-d命令时出现的ERROR-Deployer-not-found-git错误&quot; class=&quot;headerlink&quot; title=&quot;执行he
-      
+      &lt;h1 id=&quot;执行hexo-d命令时出现的ERROR-Deployer-not-found-git错误&quot;&gt;&lt;a href=&quot;#执行hexo-d命令时出现的ERROR-Deployer-not-found-git错误&quot; class=&quot;headerlink&quot; title=&quot;执行hexo d命令时出现的ERROR Deployer not found: git错误&quot;&gt;&lt;/a&gt;执行&lt;code&gt;hexo d&lt;/code&gt;命令时出现的ERROR Deployer not found: git错误&lt;/h1&gt;&lt;h2 id=&quot;具体问题&quot;&gt;&lt;a href=&quot;#具体问题&quot; class=&quot;headerlink&quot; title=&quot;具体问题&quot;&gt;&lt;/a&gt;具体问题&lt;/h2&gt;&lt;p&gt;前两天折腾博客时，在静态页面生成完成之后要部署到GitHub上时遇到了&lt;code&gt;ERROR Deployer not found: git&lt;/code&gt;的问题。&lt;/p&gt;
     
     </summary>
     
