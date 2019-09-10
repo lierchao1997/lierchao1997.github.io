@@ -360,6 +360,8 @@
           
   
   
+  
+  
           <br>
             <span class="post-meta-item" title="本文字数">
               <span class="post-meta-item-icon">
@@ -504,6 +506,20 @@
       <span class="post-meta-item-text">Disqus：</span>
     
     <a title="disqus" href="/2009/08/22/即兴而已/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2009/08/22/即兴而已/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2009/08/22/即兴而已/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2009/08/22/即兴而已/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -978,6 +994,31 @@
   }
   // defer loading until the whole page loading is completed
   window.addEventListener('load', loadCount, false);
+</script>
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'ImOxfDkKUlhBCQtCl8nMjz41-gzGzoHsz',
+    appKey: 'RQzFJDyFGdvbNJhw94qpplfL',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
 </script>
 
 </body>
