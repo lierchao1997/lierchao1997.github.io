@@ -320,7 +320,7 @@
                 
               
 
-              <time title="创建时间：2019-09-10 17:11:01 / 修改时间：17:29:38" itemprop="dateCreated datePublished" datetime="2019-09-10T17:11:01+08:00">2019-09-10</time>
+              <time title="创建时间：2019-09-10 17:11:01 / 修改时间：17:31:31" itemprop="dateCreated datePublished" datetime="2019-09-10T17:11:01+08:00">2019-09-10</time>
             </span>
           
             
@@ -396,29 +396,16 @@
 <h1 id="HEXO博客使用LeanCloud报错“Counter-not-initialized-See-more-at-console-err-msg-”"><a href="#HEXO博客使用LeanCloud报错“Counter-not-initialized-See-more-at-console-err-msg-”" class="headerlink" title="HEXO博客使用LeanCloud报错“Counter not initialized! See more at console err msg.”"></a>HEXO博客使用LeanCloud报错“Counter not initialized! See more at console err msg.”</h1><blockquote>
 <p>CSDN 的 Markdown 编辑器好像不像<code>Typora</code>那样能够正确渲染 <code>.md</code> 文档中夹杂的 HTML 标签，所以导致之前以 HTML 语法插入的图片在 CSDN 上无法正确显示</p>
 <h2 id="具体问题"><a href="#具体问题" class="headerlink" title="具体问题"></a>具体问题</h2></blockquote>
-<p>在根据文档配置好LeanCloud并完成部署之后，刷新博客网页，在主页看到每篇文章的阅读次数都显示为0，而打开每篇文章的相应页面更是发现错误信息：<code>Counter not initialized! More info at console err msg.</code>。具体情况如图所示：</p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93czEuc2luYWltZy5jbi9sYXJnZS8wMDZjTWJ5SWx5MWc2dWlxN3V3ZDhqMzB0aTA1ZWRnNC5qcGc?x-oss-process=image/format,png" alt="有报错信息的情况"></p>
-<blockquote>
-<p>此外在之前还遇到“阅读次数”不显示或者显示为<code>NaN/NaN</code>的情况，检查发现是在 leancloud 中配置的时候习惯性将自己的自定义域名协议写成了<code>HTTPS</code>，但实际上是用的<code>HTTP</code>协议。因此修改之后就出现了上面的情况。</p>
-<p>如图所示：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93czEuc2luYWltZy5jbi9sYXJnZS8wMDZjTWJ5SWx5MWc2dWlvaG14N2VqMzBsZTA0azN5cC5qcGc?x-oss-process=image/format,png" alt="协议错误的显示情况"></p>
-</blockquote>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>在搜索过程中发现有人也遇到过这个问题，于是按照《<a href="https://popwalker.github.io/article/d6ed9cc7/" target="_blank" rel="noopener">hexo使用笔记</a>》中的描述，安装了插件<code>hexo-leancloud-counter-security</code>（命令行执行<code>npm install hexo-leancloud-counter-security</code>）</p>
-<p>，并将主题配置文件<code>_config.yml</code>中的对应项<code>security</code>置为<code>false</code>。</p>
-<p>具体位置如下（第 8 行）：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&gt; leancloud_visitors:</span></span><br><span class="line"><span class="string">&gt;   enable: true</span></span><br><span class="line"><span class="string">&gt;   app_id: # &lt;app_id&gt;</span></span><br><span class="line"><span class="string">&gt;   app_key: # &lt;app_key&gt;</span></span><br><span class="line"><span class="string">&gt;   # Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security</span></span><br><span class="line"><span class="string">&gt;   # If you don't care about security in leancloud counter and just want to use it directly</span></span><br><span class="line"><span class="string">&gt;   # (without hexo-leancloud-counter-security plugin), set `security` to `false`.</span></span><br><span class="line"><span class="string">&gt;   security: false</span></span><br><span class="line"><span class="string">&gt;   betterPerformance: false</span></span><br><span class="line"><span class="string">&gt;</span></span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p>这样配置之后，就可以看到页面中的数据能够正常显示了。如下图：</p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly93czEuc2luYWltZy5jbi9sYXJnZS8wMDZjTWJ5SWx5MWc2dWoyZGRjMjBqMzBscDA0a3Q4eC5qcGc?x-oss-process=image/format,png" alt="正确配置后的显示效果"></p>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://popwalker.github.io/article/d6ed9cc7/" target="_blank" rel="noopener">hexo使用笔记</a></p>
-<blockquote>
-<p>注：原文档中建议的是两种方法：1）使用<code>hexo-leancloud-counter-security</code>插件；2）设置<code>leancloud_visitors.security = false</code>均可。</p>
-<p>但考虑到主题配置文件中关于安全性的提醒，我是按步骤分别完成了这两步。并且只安装<code>hexo-leancloud-counter-security</code>插件依然不能解决报错问题，可能真正生效的是“将<code>security</code>置为<code>false</code>”这一步。</p>
-<p>但出于安全考虑，建议大家也同时安装<code>hexo-leancloud-counter-security</code>插件。</p>
-</blockquote>
-</blockquote>
-
+<p>在根据文档配置好LeanCloud并完成部署之后，刷新博客网页，在主页看到每篇文章的阅读次数都显示为0，而打开每篇文章的相应页面更是发现错误信息：<code>Counter not initialized! More info at console err msg.</code>。
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/09/10/HEXO博客使用LeanCloud报错“Counter-not-initialized-See-more-at-console-err-msg-”/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
