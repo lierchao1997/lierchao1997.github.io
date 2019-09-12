@@ -291,6 +291,427 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="http://lierchao.com/2019/09/12/Git-学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="轩辕御龙">
+      <meta itemprop="description" content="Learn by Learning">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/006cMbyIly1g6q6euxl3wj303w03waao.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Learn">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/09/12/Git-学习/" class="post-title-link" itemprop="url">Git 学习</a>
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-12 10:17:15 / 修改时间：10:18:41" itemprop="dateCreated datePublished" datetime="2019-09-12T10:17:15+08:00">2019-09-12</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/编程工具/" itemprop="url" rel="index"><span itemprop="name">编程工具</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2019/09/12/Git-学习/" class="post-meta-item leancloud_visitors" data-flag-title="Git 学习" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+  
+  
+  
+  
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>5k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>9 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>@[toc]</p>
+<blockquote>
+<p>2018-12-09，博客园</p>
+<h1 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h1></blockquote>
+<ul>
+<li><p><strong>【强烈推荐】</strong>GitHub项目：<a href="https://github.com/pcottle/learnGitBranching" target="_blank" rel="noopener">learnGitBranching-pcottle</a></p>
+<blockquote>
+<p>网站：<a href="https://learngitbranching.js.org/" target="_blank" rel="noopener">learnGitBranching</a></p>
+</blockquote>
+</li>
+<li><p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">廖雪峰的官方网站-Git教程</a></p>
+</li>
+</ul>
+<blockquote>
+<p>整理 <strong>Git</strong> 命令如下，按第一个教程顺序整理</p>
+</blockquote>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><h2 id="初始化命令"><a href="#初始化命令" class="headerlink" title="初始化命令"></a>初始化命令</h2><ul>
+<li><code>git init</code><blockquote>
+<p>在当前文件夹初始化一个本地仓库</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="提交命令"><a href="#提交命令" class="headerlink" title="提交命令"></a>提交命令</h2><ul>
+<li><p><code>git add</code></p>
+<blockquote>
+<p>将改动（文件变化）添加到到暂存区（缓冲区），以待正式提交（commit）</p>
+</blockquote>
+</li>
+<li><p><code>git commit</code>（不建议单独使用）</p>
+<blockquote>
+<p>将暂存区的改动提交到Git，对其中文件进行一次快照，保存为一个节点</p>
+</blockquote>
+</li>
+<li><p><code>git commit -m &lt;对提交的描述信息&gt;</code></p>
+<blockquote>
+<p>在提交变化的同时添加描述信息</p>
+</blockquote>
+</li>
+<li><p><code>git commit --amend</code></p>
+<blockquote>
+<p>好像是将暂存区的修改直接提交到当前所在节点，而不是新建一个节点（提交）<br>有待检验</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="分支命令"><a href="#分支命令" class="headerlink" title="分支命令"></a>分支命令</h2><ul>
+<li><p><code>git branch &lt;新建分支名&gt; [目标节点]</code></p>
+<blockquote>
+<p>在目标节点新建一个分支<br>若不指定目标节点，则默认在当前节点（HEAD）新建分支</p>
+</blockquote>
+</li>
+<li><p><code>git branch -f &lt;指定分支名&gt; &lt;目标节点位置&gt;</code></p>
+<blockquote>
+<p>此命令可以将指定分支强制指向目标节点<br>如<code>git branch -f master HEAD~4</code>命令的作用是使master强制指向HEAD所在节点的前4级节点<br>其中，<code>&lt;目标节点位置&gt;</code>可以是具体的节点哈希值，也可以是相对引用的节点</p>
+</blockquote>
+</li>
+<li><p><code>git branch -u &lt;指定远程分支名&gt; [指定本地分支名]</code></p>
+<blockquote>
+<p>将指定远程分支与指定本地分支关联<br>如果省略<code>[本地分支名]</code>，则默认将当前分支与远程分支关联。[疑问]<sup><a href="#fn_1" id="reffn_1">1</a></sup></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="切换命令"><a href="#切换命令" class="headerlink" title="切换命令"></a>切换命令</h2><ul>
+<li><p><code>git checkout &lt;分支名/标签名/节点哈希值等&gt;</code></p>
+<blockquote>
+<p>切换到对应的分支、标签或节点。（实际上是改变<strong>HEAD</strong>的指向，“HEAD的指向”代表当前所在位置）</p>
+</blockquote>
+</li>
+<li><p><code>git checkout -b &lt;新建分支名&gt;</code></p>
+<blockquote>
+<p>在当前节点新建一个分支，并立即切换到这一新建分支</p>
+</blockquote>
+</li>
+<li><p><code>git checkout -b &lt;新建分支名&gt; &lt;目标远程分支名&gt;</code>[疑问]<sup><a href="#fn_3" id="reffn_3">3</a></sup></p>
+<blockquote>
+<p>在当前节点新建并切换到一个新分支，同时将其与指定的远程分支关联，用来跟踪这一远程分支</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="相对引用"><a href="#相对引用" class="headerlink" title="相对引用"></a>相对引用</h3><ul>
+<li><p><code>git checkout &lt;分支名/HEAD&gt;^</code></p>
+<blockquote>
+<p>将HEAD指向指定分支名指向节点的上一节点，即父节点。<br>或将HEAD指向HEAD的父节点<br>其中，<code>^</code>符号可以一次使用多个。每使用一个代表将HEAD往上一级节点移动一次<br>比如<code>git checkout master^^</code>命令表示<strong>将HEAD指针指向master指向节点的上两级节点</strong>（即上一级的上一级节点）</p>
+</blockquote>
+</li>
+<li><p><code>git checkout &lt;分支名/HEAD&gt;~[数字]</code></p>
+<blockquote>
+<p>作用类比于上一条命令。但通过<code>[数字]</code>可以直接指定将HEAD往前指向的节点级数<br>若不加<code>[数字]</code>则默认上移一级，即<code>git checkout master~</code>与<code>git checkout master^</code>作用相同</p>
+</blockquote>
+</li>
+<li><p><code>git checkout &lt;节点&gt;^[数字]</code></p>
+<blockquote>
+<p>数字指定回溯到哪一条分支<br>若没有数字，则默认回溯到直接分支（即合并操作执行时HEAD所在的分支）</p>
+</blockquote>
+</li>
+<li><p><code>git checkout &lt;节点&gt;~^2~2</code></p>
+<blockquote>
+<p>支持链式操作，将多个切换命令合并为一条命令</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="合并命令"><a href="#合并命令" class="headerlink" title="合并命令"></a>合并命令</h2><ul>
+<li><p><code>git merge &lt;分支名&gt;</code><strong>（合并方法1）</strong></p>
+<blockquote>
+<p>将&lt;分支名&gt;指定的分支合并到<strong>当前</strong>所在分支<br>即以<strong>当前分支</strong>为主，最终合并的结果（最终节点）也是由当前分支来指向【疑问】<sup><a href="#fn_10" id="reffn_10">10</a></sup><br><code>merge</code>的优势在于可以保持<strong>提交历史</strong>的顺序、结构</p>
+</blockquote>
+</li>
+<li><p><code>git rebase &lt;目标分支&gt; [移动分支]</code><strong>（合并方法2）</strong></p>
+<blockquote>
+<p>直译为“以目标分支（分支1）为基础，结合移动分支（分支2）进行梳理整合”<br>将<code>[移动分支]</code>的提交记录整理，复制一个副本合并到<code>[目标分支]</code>，得到一个线性提交记录。原提交记录依然存在。<br>同时将<code>[移动分支]</code>指向rebase得到的分支顶端节点（有待验证）<br>直译过来就是“将<code>[移动分支]</code>整合到<code>[目标分支]</code>”<br>若不指定<code>[移动分支]</code>，则默认移动<strong>当前分支</strong><br>优势在于可以保留干净、线性的提交树</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="标签命令"><a href="#标签命令" class="headerlink" title="标签命令"></a>标签命令</h2><ul>
+<li><code>git tag &lt;标签名&gt; [指定节点]</code><blockquote>
+<p>将标签名标注于指定节点<br>若不指定节点，则加标签于当前节点（HEAD）</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="查看命令"><a href="#查看命令" class="headerlink" title="查看命令"></a>查看命令</h2><ul>
+<li><code>git log</code><blockquote>
+<p>列出提交记录（具体列出全部还是当前分支有待确定）</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="撤销变更命令-疑问-4"><a href="#撤销变更命令-疑问-4" class="headerlink" title="撤销变更命令[疑问]4"></a>撤销变更命令[疑问]<sup><a href="#fn_4" id="reffn_4">4</a></sup></h2><ul>
+<li><p><code>git reset &lt;目标节点&gt;</code>（仅适用于本地分支）</p>
+<blockquote>
+<p>将当前分支指向目标节点<br>即忽略目标节点之后的所有提交<br>但被忽略的节点所作的变更依旧存在，只是处于未加入暂存区状态</p>
+</blockquote>
+</li>
+<li><p><code>git revert &lt;节点&gt;</code>（适用于远程分支）</p>
+<blockquote>
+<p>撤销指定节点的修改，即回到指定节点父节点的状态<br>实现方式不同于<code>git reset &lt;目标节点&gt;</code>命令<br><code>git reset [目标节点]</code>仅仅通过修改指向实现，<br><code>git revert &lt;节点&gt;</code>是对当前节点与其父节点的差异重做而产生一个新的提交节点，得到指定节点的子节点，但是该子节点的状态与指定节点的父节点状态相同<br>此命令没有实际使用过，有待检验</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="远程命令"><a href="#远程命令" class="headerlink" title="远程命令"></a>远程命令</h2><h3 id="克隆到本地"><a href="#克隆到本地" class="headerlink" title="克隆到本地"></a>克隆到本地</h3><ul>
+<li><code>git clone &lt;ssh/https地址&gt;</code><blockquote>
+<p>从远程仓端克隆远程仓库到本地</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="从远程仓库拉取内容"><a href="#从远程仓库拉取内容" class="headerlink" title="从远程仓库拉取内容"></a>从远程仓库拉取内容</h3><ul>
+<li><p><code>git fetch</code></p>
+<blockquote>
+<p>下载远程仓库所有分支及提交记录到本地各个远程分支</p>
+</blockquote>
+</li>
+<li><p><code>git fetch &lt;remote&gt; &lt;place&gt;</code></p>
+<blockquote>
+<p>类比<code>push</code>命令的参数<br>可以理解为仅仅是将远程仓库内容下载下来，但是并没有对本地文件作出改动。但是会更新本地仓库的远程分支指向。<br>区别于<code>git pull</code>命令<br>不需要当前处于远程分支</p>
+</blockquote>
+</li>
+<li><p><code>git fetch &lt;远程仓库名称&gt; &lt;指定的远程分支名&gt;</code>【疑问】<sup><a href="#fn_9" id="reffn_9">9</a></sup></p>
+<blockquote>
+<p>同时会更新本地仓库的对应的远程分支（单独的<code>fetch</code>会更新吗？）</p>
+</blockquote>
+</li>
+<li><p><code>git fetch &lt;远程仓库名称&gt; &lt;源节点&gt;:&lt;本地目标分支&gt;</code>（实际很少用）</p>
+<blockquote>
+<p><code>&lt;源节点&gt;</code>是指远程仓库中的索引位置，<code>&lt;目标分支&gt;</code>才是本地分支了。类比<code>push</code>命令，刚好相反。<br>如果本地仓库不存在指定的<strong>目标分支</strong>，则Git自动在本地仓库（当前节点）创建一个同名分支，并执行操作<br>不更新本地的远程分支（？）</p>
+</blockquote>
+</li>
+<li><p><code>git fetch &lt;远程仓库名称&gt; :&lt;本地目标分支&gt;</code></p>
+<blockquote>
+<p>命令自动在本地（当前节点）<strong>创建</strong>一个本地分支</p>
+</blockquote>
+</li>
+<li><p><code>git pull &lt;&gt;</code></p>
+<blockquote>
+<p>相当于<code>git fetch</code>与<code>git merge</code>相继作用的效果<br>即不光下载远程内容并把本地仓库远程分支指向最新节点，同时将当前所在分支指向这一节点[疑问]<sup><a href="#fn_5" id="reffn_5">5</a></sup>【疑问】<sup><a href="#fn_8" id="reffn_8">8</a></sup></p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p><code>git pull origin foo</code>相当于<code>git pull origin foo; git merge o/foo</code><br><code>git pull origin bar~1:bugFix</code>相当于<code>git fetch origin bar~1:bugFix; git merge bugFix</code><br>只关心提交<strong>最终</strong>合并到哪里</p>
+</blockquote>
+<ul>
+<li><code>git pull --rebase</code><blockquote>
+<p>相当于<code>git fetch</code> + <code>git rebase &lt;远程分支&gt;</code></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="向远程仓库推送内容"><a href="#向远程仓库推送内容" class="headerlink" title="向远程仓库推送内容"></a>向远程仓库推送内容</h3><ul>
+<li><p><code>git push &lt;remote&gt; &lt;place&gt;</code></p>
+<blockquote>
+<p>以上为<code>push</code>命令的标准表述</p>
+</blockquote>
+</li>
+<li><p><code>git push &lt;远程仓库名称&gt; &lt;要推送的本地分支名&gt;</code></p>
+<blockquote>
+<p>可以直译为“将本地分支A推送到远程仓库1”<br>向指定远程仓库推送指定的本地分支的提交记录，并更新本地仓库中与指定本地分支相关联的远程分支[疑问已解决]<sup><a href="#fn_7" id="reffn_7">7</a></sup><br>[疑问]<sup><a href="#fn_2" id="reffn_2">2</a></sup></p>
+</blockquote>
+</li>
+<li><p><code>git push &lt;远程仓库名称&gt; &lt;源节点&gt;:&lt;远程目标分支&gt;</code></p>
+<blockquote>
+<p>如果在远程仓库不存在指定的<strong>目标分支</strong>，则Git会在远程仓库自行创建一个新的分支</p>
+</blockquote>
+</li>
+<li><p><code>git push &lt;远程仓库名称&gt; :&lt;远程目标分支&gt;</code></p>
+<blockquote>
+<p><strong>删除</strong>指定的远程分支</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="进阶命令"><a href="#进阶命令" class="headerlink" title="进阶命令"></a>进阶命令</h1><h2 id="整理提交记录"><a href="#整理提交记录" class="headerlink" title="整理提交记录"></a>整理提交记录</h2><ul>
+<li><code>git cherry-pick &lt;指定节点&gt; [指定节点] ...</code>（cherry-pick意为“精挑细选”）<blockquote>
+<p>可以在一条命令中指定多个节点为执行对象（好像需要是节点的哈希值）可以是提交树上任意位置的节点[疑问]<sup><a href="#fn_6" id="reffn_6">6</a></sup>，但不能是当前节点上游的节点<br>命令的作用顾名思义，是<strong>选中</strong>指定节点，并按顺序将节点副本顺次附加到当前所在节点（HEAD）之后<br>或许这个命令可以直译为“<strong>精选</strong>”命令</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="交互式rebase"><a href="#交互式rebase" class="headerlink" title="交互式rebase"></a>交互式rebase</h2><ul>
+<li><code>git rebase -i &lt;分支名/节点/HEAD&gt;~[数字]</code><blockquote>
+<p>使用参数<code>--interactive</code>（简写为<code>-i</code>）<br>尝试了一下，好像只能用HEAD作为索引？（经验证，不是）<br>数字n代表包括HEAD所在节点向上的n个节点<br>打开一个rebase UI界面</p>
+<ul>
+<li>调整提交记录的顺序（通过鼠标拖放）</li>
+<li>删除不想要的提交</li>
+<li>合并提交</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h2 id="描述节点"><a href="#描述节点" class="headerlink" title="描述节点"></a>描述节点</h2><ul>
+<li><code>git describe &lt;索引&gt;</code><blockquote>
+<p>作用是输出关于离<code>[索引]</code>最近的标签的信息<br>“最近”的意思仅限于同一条分支（有待验证）<br><code>&lt;索引&gt;</code>指所有可以指向具体节点的值，官方表述为“任何能被 Git 识别成提交记录的引用”<br>若不指定具体节点，则作用于当前节点（HEAD）</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ul>
+<li><p>节点哈希值基于 SHA-1，共 40 位</p>
+</li>
+<li><p>分支名/HEAD等本质上类似一个指针，指向某个节点</p>
+<blockquote>
+<p>具体讲，分支名指向当前分支的最新节点；而HEAD指向当前状态实际所在的节点<br>同时，<code>git checkout [分支名/标签名/节点哈希值]</code>命令的本质是移动HEAD指针的指向</p>
+</blockquote>
+</li>
+<li><p>本地仓库里的远程分支，或者说远程仓库分支对应的本地分支名（如果存在）不能手动移动。只有在与远程仓库同步时才能够自动修改。</p>
+</li>
+</ul>
+<h1 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h1><ul>
+<li><p>既然可以用rebase UI直接对节点重排，那各个提交记录到底是记录的“变化”还是文件本身的快照啊？</p>
+<blockquote>
+<p>如果只是变化的话，重拍之后怎么可能还可以正确应用呢？</p>
+</blockquote>
+</li>
+<li><p>尝试了一下，<code>git rebase -i [索引]</code>好像只能用HEAD作为索引？</p>
+<blockquote>
+<p>不必。索引均可。</p>
+</blockquote>
+</li>
+<li><p>对提交进行重排之后，所有后续节点都会产生相应改变？还是说因为记录的都是“变化”，所以改变内容不影响后续？</p>
+</li>
+<li><p>实际工作环境是否存在“本地仓库的远程分支”这一说法？</p>
+<blockquote>
+<p>在<strong>“远程跟踪”</strong>一节提到了，确实存在。<br>原话如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">当你克隆时, Git 会为远程仓库中的每个分支在本地仓库中创建一个远程分支（比如 o/master）。然后再创建一个跟踪远程仓库中活动分支的本地分支，默认情况下这个本地分支会被命名为 master。</span><br><span class="line"></span><br><span class="line">克隆完成后，你会得到一个本地分支（如果没有这个本地分支的话，你的目录就是“空白”的），但是可以查看远程仓库中所有的分支（如果你好奇心很强的话）。这样做对于本地仓库和远程仓库来说，都是最佳选择。</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>本地仓库有，而远程仓库没有的分支能否推送到远程端并自动创建一个新分支？</p>
+</li>
+</ul>
+<blockquote id="fn_1">
+<sup>1</sup>. 如果当前没有指向具体分支，而是分离HEAD状态呢？<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_2">
+<sup>2</sup>. 本地仓库有，而远程仓库没有的分支能否推送到远程端并自动创建一个新分支？<a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_3">
+<sup>3</sup>. 是否能够不指定“远程分支名”，从而默认关联某一远程分支<a href="#reffn_3" title="Jump back to footnote [3] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_4">
+<sup>4</sup>. 没懂，看完再看一下。<a href="#reffn_4" title="Jump back to footnote [4] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_5">
+<sup>5</sup>. 但是不更新在本地的远程分支？比如<code>o/master</code>，不会改变？<a href="#reffn_5" title="Jump back to footnote [5] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_6">
+<sup>6</sup>. <code>git cherry-pick</code>命令的作用对象是否可以是<strong>任意节点</strong>（除当前分支的上游节点外）？<a href="#reffn_6" title="Jump back to footnote [6] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_7">
+<sup>7</sup>. 若关联的本地分支与远程分支名称不一致，则在<code>push</code>命令中是以远程分支名为准吗？试一试。（顺便试一试脚注的冒号用中文冒号行不行）<a href="#reffn_7" title="Jump back to footnote [7] in the text."> &#8617;</a>
+</blockquote>
+<blockquote>
+<p>显然，中文冒号不行<br>经试验，<code>push</code>命令中指定的<strong>分支名</strong>以本地分支为准<br>故可以直译为“将本地分支A推送到远程仓库1”</p>
+</blockquote>
+<blockquote id="fn_8">
+<sup>8</sup>. 是否仅限于当前分支？试一试<a href="#reffn_8" title="Jump back to footnote [8] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_9">
+<sup>9</sup>. 应该也是对应于<code>push</code>命令，<code>fetch</code>则以<strong>远程分支名</strong>为准，将指定的远程分支的记录全部拉取到本地与之相关联的分支上。试一试<a href="#reffn_9" title="Jump back to footnote [9] in the text."> &#8617;</a>
+</blockquote>
+<p>单独的<code>fetch</code>会更新本地仓库的远程分支吗？试一试</p>
+<blockquote id="fn_10">
+<sup>10</sup>. 若当前指向一个具体节点而不是某一个分支名呢？即处在分离HEAD状态，且可以更进一步，HEAD指向的节点没有其他任何分支同时指向，会发生什么？<a href="#reffn_10" title="Jump back to footnote [10] in the text."> &#8617;</a>
+</blockquote>
+<p>单纯移动HEAD？</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="http://lierchao.com/2019/09/10/阅读《深度学习入门：基于Python的理论与实现》的一些问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1574,147 +1995,6 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="http://lierchao.com/2012/07/13/自习随笔/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="轩辕御龙">
-      <meta itemprop="description" content="Learn by Learning">
-      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/006cMbyIly1g6q6euxl3wj303w03waao.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Learn">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-            
-            <a href="/2012/07/13/自习随笔/" class="post-title-link" itemprop="url">自习随笔</a>
-          
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2012-07-13 18:08:06" itemprop="dateCreated datePublished" datetime="2012-07-13T18:08:06+08:00">2012-07-13</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-07 13:47:47" itemprop="dateModified" datetime="2019-09-07T13:47:47+08:00">2019-09-07</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/轩辕诗集/" itemprop="url" rel="index"><span itemprop="name">轩辕诗集</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            <span id="/2012/07/13/自习随笔/" class="post-meta-item leancloud_visitors" data-flag-title="自习随笔" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-          
-  
-  
-  
-  
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span>128</span>
-            </span>
-          
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              
-              <span>1 分钟</span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>公元2010（庚寅）年11月14日夜21：03，晚自习，无故心情大好，故作</p>
-</blockquote>
-<p>窗外冷月洒清辉，</p>
-<p>屋内如昼有灯垂。</p>
-<p>未见后羿射九日，</p>
-<p>却有嫦娥登月回。</p>
-<p>五道天地人神鬼，</p>
-<p>修罗之道不在内。</p>
-<p style="color: red">我自癫狂我逍遥，</p>
-
-<p style="color: red">哪由他人论白黑！</p>
-
-<blockquote>
-<p style="color: blue">（2010.12.28日，夜，20：56晚自习，补作）</p></blockquote>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -1767,7 +2047,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1793,7 +2073,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -1912,14 +2192,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">15k</span>
+    <span title="站点总字数">20k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">27 分钟</span>
+    <span title="站点阅读时长">36 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
