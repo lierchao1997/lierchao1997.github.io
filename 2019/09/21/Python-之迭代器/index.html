@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN,en,default">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="alternate" href="/atom.xml" title="Learn" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: true,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Python 之迭代器1 概念引入在之前的教程中，我们已经接触过一些典型的for语句">
+<meta name="keywords" content="Python,编程语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 之迭代器">
+<meta property="og:url" content="http://lierchao.com/2019/09/21/Python-之迭代器/index.html">
+<meta property="og:site_name" content="Learn">
+<meta property="og:description" content="Python 之迭代器1 概念引入在之前的教程中，我们已经接触过一些典型的for语句">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-20T16:32:08.538Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python 之迭代器">
+<meta name="twitter:description" content="Python 之迭代器1 概念引入在之前的教程中，我们已经接触过一些典型的for语句">
+  <link rel="canonical" href="http://lierchao.com/2019/09/21/Python-之迭代器/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Python 之迭代器 | Learn</title>
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=147263392-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '147263392-1');
+    }
+  </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?149ce4dbc4aa354dbc495a2f412695c3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Learn</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">日有所进，岁有所得</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-commonweal">
+      
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a class="book-mark-link book-mark-link-fixed" href="#"></a>
+
+  <a href="https://github.com/lierchao1997" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://lierchao.com/2019/09/21/Python-之迭代器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="轩辕御龙">
+      <meta itemprop="description" content="Learn by Learning">
+      <meta itemprop="image" content="http://ww1.sinaimg.cn/large/006cMbyIly1g6q6euxl3wj303w03waao.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Learn">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">Python 之迭代器
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-21 00:31:01 / 修改时间：00:32:08" itemprop="dateCreated datePublished" datetime="2019-09-21T00:31:01+08:00">2019-09-21</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/编程语言/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/编程语言/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span id="/2019/09/21/Python-之迭代器/" class="post-meta-item leancloud_visitors" data-flag-title="Python 之迭代器" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  
+  
+  
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>4.5k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>8 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Python-之迭代器"><a href="#Python-之迭代器" class="headerlink" title="Python 之迭代器"></a>Python 之迭代器</h1><h2 id="1-概念引入"><a href="#1-概念引入" class="headerlink" title="1 概念引入"></a>1 概念引入</h2><p>在之前的教程中，我们已经接触过一些典型的<code>for</code>语句<a id="more"></a>，比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list_example = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> list_example:</span><br><span class="line"><span class="meta">... </span> print(i)</span><br><span class="line">...</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+<p>通过简单地使用<code>for</code>和<code>in</code>两个关键字，我们可以很轻松地实现在 C 语言中繁琐的遍历操作。相比较而言，C 语言中要实现相同的功能，需要这样写（假设存在整型数组<code>list_example</code>）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; list_length; i++)</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, list_example[i]);</span><br></pre></td></tr></table></figure>
+<p>显而易见，在遍历元素的操作上，Python 的表达更加直观优雅，简洁明了；这正是因为 Python 在实现<code>for</code>语句的时候，恰到好处地使用了“迭代器”的概念。</p>
+<p>迭代器在 Python 中随处可见，并且具有统一的标准。通过使用迭代器，Python 能够逐个访问列表<code>list_example</code>中的每个元素。</p>
+<p>下面我们来进一步讨论相关的机制。</p>
+<h2 id="2-定义及原理"><a href="#2-定义及原理" class="headerlink" title="2 定义及原理"></a>2 定义及原理</h2><h3 id="2-1-迭代器的定义"><a href="#2-1-迭代器的定义" class="headerlink" title="2.1 迭代器的定义"></a>2.1 迭代器的定义</h3><blockquote>
+<p>迭代器（iterator）是一种可在容器（container）中遍访的接口，为使用者封装了内部逻辑。</p>
+<p>——<a href="[https://baike.baidu.com/item/%E8%BF%AD%E4%BB%A3%E5%99%A8/3803342?fr=aladdin](https://baike.baidu.com/item/迭代器/3803342?fr=aladdin">百度百科·迭代器</a>) 大意</p>
+</blockquote>
+<p>上面是我们可以查到的、对“迭代器”的一个宽泛的定义。</p>
+<p>而具体到 Python 中，迭代器也属于内置的<strong>标准类</strong>之一，是与我们之前学习过的“序列”同一层次的概念。</p>
+<p>对于迭代器对象本身来说，需要具有<a href="https://docs.python.org/3/library/functions.html#iter" target="_blank" rel="noopener"><code>__iter__()</code></a>和<a href="https://docs.python.org/3/library/stdtypes.html#iterator.__next__" target="_blank" rel="noopener"><code>__next__()</code></a>两种方法，二者合称为“<strong>迭代器协议</strong>”。也就是说，只要同时具有这两种方法，Python 解释器就会认为该对象是一个迭代器；反之，只具有其中一个方法或者二者都不具有，解释器则认为该对象不是一个迭代器。</p>
+<p>上述论断可由下面的代码验证（需要用到内置函数<code>isinstance()</code>，来判断一个对象是否是某个类的实例；该用法启发于[<a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017323698112640" target="_blank" rel="noopener">廖雪峰的官方网站</a>]）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> Iterable, Iterator, Container</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">bothIterAndNext</span>:</span></span><br><span class="line"><span class="meta">... </span>	<span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>		<span class="keyword">pass</span></span><br><span class="line"><span class="meta">... </span>	<span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>		<span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(bothIterAndNext(), Iterable) <span class="comment"># 两种方法都有的对象是可迭代的</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(bothIterAndNext(), Iterator) <span class="comment"># 两种方法都有的对象是迭代器</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">onlyNext</span>:</span></span><br><span class="line"><span class="meta">... </span>	<span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>		<span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(onlyNext(), Iterable) <span class="comment"># 只有方法 __next__() 是不可迭代的</span></span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(onlyNext(), Iterator) <span class="comment"># 只有方法 __next__() 不是迭代器</span></span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">onlyIter</span>:</span></span><br><span class="line"><span class="meta">... </span>	<span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>		<span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(onlyIter(), Iterable) <span class="comment"># 只有方法 __iter__() 是可迭代的</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(onlyIter(), Iterator) <span class="comment"># 只有方法 __iter__() 不是迭代器</span></span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<p>由第 8~11 行的代码可知，对于 Python 来说，判断一个对象是否是迭代器的标准仅仅是“是否同时具有<code>__iter__()</code>和<code>__next__()</code>这两个方法”。</p>
+<p>并且从第 17~20 行的代码也可以验证上述推断：只具有方法<code>__next__()</code>既不是可迭代的，也不是一个迭代器。</p>
+<p>有意思的事情发生在代码第 26、27 两行：代码输出结果显示，只有方法<code>__iter__()</code>的对象居然是<strong>可迭代的</strong>！（后文解释）</p>
+<h3 id="2-2-迭代器的实质"><a href="#2-2-迭代器的实质" class="headerlink" title="2.2 迭代器的实质"></a>2.2 迭代器的实质</h3><p>迭代器对象本质上代表的是一个数据流，通过反复调用其方法<code>__next__()</code>或将其作为参数传入<code>next()</code>函数，即可按顺序逐个返回数据流中的每一项；直到流中不再有数据项，从而抛出一个<code>StopIteration</code>异常，终止迭代。</p>
+<p>在 Python 中内置了两个函数：<code>iter()</code>和<code>iter()</code>，分别用于“<strong>将参数对象转换为迭代器对象</strong>”和“<strong>从迭代器中取出下一项</strong>”。</p>
+<p>实际上所有具有方法<code>__iter__()</code>的对象均被视作“可迭代的”。因为方法<code>__iter__()</code>进行的操作其实就是返回一个该对象对应的迭代器，也就是说“可迭代的（iterable）”的真实含义其实是“可以被转换为迭代器（iterator）的”。而内置函数<code>iter()</code>也是调用对象本身具有的<code>__iter__()</code>方法来实现特定对象到迭代器的转换。</p>
+<p>相应地，内置函数<code>next()</code>其实是调用了对象本身的方法<code>__next__()</code>，而该方法执行的操作就是从对象对应的数据流中取出下一项。</p>
+<p>因此直接调用对象的<code>__iter__()</code>和<code>__next__()</code>方法与将对象作为参数传入内置函数<code>iter()</code>和<code>next()</code>是等效的。</p>
+<p>要注意的一点在于，对迭代器调用其本身的<code>__iter__()</code>方法，得到的将会是这个迭代器自身，该迭代器相关的状态都会被保留，包括该迭代器目前的迭代状态。见下述代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>li = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>li_iterator = iter(li)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(li, Iterator)</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(li_iterator, Iterator)</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p>显然，列表<code>li</code>本身并不是一个迭代器，而将其传入内置函数<code>iter()</code>就得到了相应于列表<code>li</code>的迭代器<code>li_iterator</code>。我们调用<code>next()</code>函数来迭代它：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(li_iterator)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(li_iterator)</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>一切都在预料之中。我们再来将其本身作为参数传入内置函数<code>iter()</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>li_iterator = iter(li_iterator)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(li_iterator)</span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p>到这里跟我们希望的就有所出入了。在使用这样一个语句的时候，通常我们的目的都是得到一个新的迭代器，而非跟原先的迭代器一样的对象。</p>
+<p>更进一步地，我们还可以发现，对迭代器调用<code>iter()</code>函数得到的对象不仅与原先的迭代器具有相同的状态，它们其实就是指向<strong>同一个对象</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(li_iterator)</span><br><span class="line"><span class="number">2195581916440</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>li_iterator = iter(li_iterator)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(li_iterator)</span><br><span class="line"><span class="number">2195581916440</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>li_iterator2 = iter(li_iterator)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(li_iterator2)</span><br><span class="line"><span class="number">2195581916440</span></span><br></pre></td></tr></table></figure>
+<p>也就是说在对象本身就是一个迭代器的情况下，生成的对应迭代器的时候 Python 不会进行另外的操作，就返回这个迭代器本身作为结果。</p>
+<h2 id="3-实现一个迭代器类"><a href="#3-实现一个迭代器类" class="headerlink" title="3 实现一个迭代器类"></a>3 实现一个迭代器类</h2><blockquote>
+<p>本节构建类的代码来自[<a href="https://docs.python.org/3/tutorial/classes.html?highlight=iterator#iterators" target="_blank" rel="noopener">Python3 文档-类-9.8 迭代器</a>]</p>
+</blockquote>
+<p>有了上面的讨论，我们就可以自己实现一个简单的迭代器。只要确保这个简单迭代器具有与迭代器定义相符的行为即可。</p>
+<p>说人话就是：要定义一个数据类型，具有<code>__iter__()</code>方法并且该方法返回一个带有<code>__next__()</code>方法的对象，而当该类已经具有<code>__next__()</code>方法时则返回其本身。示例代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Reverse</span>:</span></span><br><span class="line">    <span class="string">"""反向遍历序列对象的迭代器"""</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, data)</span>:</span></span><br><span class="line">        self.data = data</span><br><span class="line">        self.index = len(data)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.index == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">raise</span> StopIteration</span><br><span class="line">        self.index = self.index - <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> self.data[self.index]</span><br></pre></td></tr></table></figure>
+<p>验证一下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>rev = Reverse(<span class="string">'justdopython.com'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(rev)</span><br><span class="line"><span class="string">'m'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(rev)</span><br><span class="line"><span class="string">'o'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(rev)</span><br><span class="line"><span class="string">'c'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>next(rev)</span><br><span class="line"><span class="string">'.'</span></span><br></pre></td></tr></table></figure>
+<p>(o゜▽゜)o☆[BINGO!]</p>
+<p>任务完成！</p>
+<h2 id="4-for语句与迭代器"><a href="#4-for语句与迭代器" class="headerlink" title="4 for语句与迭代器"></a>4 <code>for</code>语句与迭代器</h2><p>回到文章开头我们作为引子的<code>for</code>循环示例，实际上在执行<code>for</code>语句的时候，Python 悄悄调用了内置函数<a href="https://docs.python.org/3/library/functions.html#iter" target="_blank" rel="noopener"><code>iter()</code></a>，并将<code>for</code>语句中的容器对象作为参数传入；而函数<a href="https://docs.python.org/3/library/functions.html#iter" target="_blank" rel="noopener"><code>iter()</code></a>返回值则是一个迭代器对象。</p>
+<p>因此，<code>for</code>语句是将容器对象转换为迭代器对象之后，调用<code>__next__()</code>方法，逐个访问原容器中的各个对象，直到遍历完所有元素，抛出一个<code>StopIteration</code>异常，并终止<code>for</code>循环。</p>
+<h2 id="5-总结"><a href="#5-总结" class="headerlink" title="5 总结"></a>5 总结</h2><ul>
+<li>迭代器（iterator）首先要是可迭代的（iterable）；即迭代器一定是可迭代的，但可迭代的不一定是迭代器</li>
+<li>可迭代的对象意味着可以被转换为迭代器</li>
+<li>迭代器需要同时具有方法<code>__iter__()</code>和<code>__next__()</code></li>
+<li>对迭代器调用<code>iter()</code>函数，得到的是这个迭代器本身</li>
+<li><code>for</code>循环实际上使用了迭代器，并且一般情况下将异常<code>StopIteration</code>作为循环终止条件</li>
+</ul>
+<p>本文探究了 Python 中迭代器的相关知识点，深入理解了迭代器的属性和行为，学到了两个重要的方法<code>__iter__()</code>和<code>__next__()</code>。同时搞明白了 Python 实现<code>for</code>循环的内部机制。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>[1] <a href="https://docs.python.org/3/library/stdtypes.html" target="_blank" rel="noopener">Python3 文档-内置类型</a></p>
+<p>[2] <a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017323698112640" target="_blank" rel="noopener">廖雪峰的官方网站</a></p>
+<p>[3] <a href="https://docs.python.org/3/tutorial/classes.html?highlight=iterator#iterators" target="_blank" rel="noopener">Python3 文档-类-9.8 迭代器</a></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>轩辕御龙</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://lierchao.com/2019/09/21/Python-之迭代器/" title="Python 之迭代器">http://lierchao.com/2019/09/21/Python-之迭代器/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN,en" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Python/" rel="tag"># Python</a>
+            
+              <a href="/tags/编程语言/" rel="tag"># 编程语言</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/12/Python-之引用/" rel="next" title="Python 之引用">
+                  <i class="fa fa-chevron-left"></i> Python 之引用
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-之迭代器"><span class="nav-number">1.</span> <span class="nav-text">Python 之迭代器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-概念引入"><span class="nav-number">1.1.</span> <span class="nav-text">1 概念引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-定义及原理"><span class="nav-number">1.2.</span> <span class="nav-text">2 定义及原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-迭代器的定义"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 迭代器的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-迭代器的实质"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 迭代器的实质</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-实现一个迭代器类"><span class="nav-number">1.3.</span> <span class="nav-text">3 实现一个迭代器类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-for语句与迭代器"><span class="nav-number">1.4.</span> <span class="nav-text">4 for语句与迭代器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-总结"><span class="nav-number">1.5.</span> <span class="nav-text">5 总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.6.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="http://ww1.sinaimg.cn/large/006cMbyIly1g6q6euxl3wj303w03waao.jpg"
+      alt="轩辕御龙">
+  <p class="site-author-name" itemprop="name">轩辕御龙</p>
+  <div class="site-description" itemprop="description">Learn by Learning</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/lierchao1997" title="GitHub &rarr; https://github.com/lierchao1997" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:lierchao1997@gmail.com" title="E-Mail &rarr; mailto:lierchao1997@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://space.bilibili.com/26246225" title="Bilibili &rarr; https://space.bilibili.com/26246225" rel="noopener" target="_blank"><i class="fa fa-fw fa-tv"></i>Bilibili</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://blog.csdn.net/w573719227" title="CSDN &rarr; https://blog.csdn.net/w573719227" rel="noopener" target="_blank"><i class="fa fa-fw fa-book"></i>CSDN</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="/lierchao1997.lofter.com" title="LOFTER &rarr; lierchao1997.lofter.com"><i class="fa fa-fw fa-book-open"></i>LOFTER</a>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN,en" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      推荐链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://co5.me/" title="https://co5.me/" rel="noopener" target="_blank">†少女癌†</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="http://mindhacks.cn/" title="http://mindhacks.cn/" rel="noopener" target="_blank">刘未鹏 | Mind Hacks</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https://coolshell.cn/" rel="noopener" target="_blank">CoolShell</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">轩辕御龙</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">30k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">55 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+  
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+            
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.log('Failed to create', error);
+                });
+            
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=ImOxfDkKUlhBCQtCl8nMjz41-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'ImOxfDkKUlhBCQtCl8nMjz41-gzGzoHsz',
+            'X-LC-Key': 'RQzFJDyFGdvbNJhw94qpplfL',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script><script src="/js/bookmark.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://lierchao.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'ImOxfDkKUlhBCQtCl8nMjz41-gzGzoHsz',
+    appKey: 'RQzFJDyFGdvbNJhw94qpplfL',
+    placeholder: '欢迎留言',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
