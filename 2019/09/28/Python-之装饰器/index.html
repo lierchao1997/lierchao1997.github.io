@@ -56,20 +56,20 @@
   };
 </script>
 
-  <meta name="description" content="Python 之装饰器1. 概念介绍装饰器（decorator），又称“装饰函数”，即一种返回值也是函数的函数，可以称之为“函数的函数”。其目的是在不对现有函数进行修改的情况下，实现额外的功能。最基本的理念来自于一种被称为“装饰模式”的设计模式。 在 Python 中，装饰器属于纯粹的“语法糖”，不使用也没关系，但是使用的话能够大大简化代码，使代码更加易读——当然，是对知道这是怎么回事儿的人而言。">
+  <meta name="description" content="Python 之装饰器1. 概念介绍装饰器（decorator），又称“装饰函数”，即一种返回值也是函数的函数，可以称之为“函数的函数”。其目的是在不对现有函数进行修改的情况下，实现额外的功能。最基本的理念来自于一种被称为“装饰模式”的设计模式。">
 <meta name="keywords" content="Python,编程语言">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python 之装饰器">
 <meta property="og:url" content="http://lierchao.com/2019/09/28/Python-之装饰器/index.html">
 <meta property="og:site_name" content="Learn">
-<meta property="og:description" content="Python 之装饰器1. 概念介绍装饰器（decorator），又称“装饰函数”，即一种返回值也是函数的函数，可以称之为“函数的函数”。其目的是在不对现有函数进行修改的情况下，实现额外的功能。最基本的理念来自于一种被称为“装饰模式”的设计模式。 在 Python 中，装饰器属于纯粹的“语法糖”，不使用也没关系，但是使用的话能够大大简化代码，使代码更加易读——当然，是对知道这是怎么回事儿的人而言。">
+<meta property="og:description" content="Python 之装饰器1. 概念介绍装饰器（decorator），又称“装饰函数”，即一种返回值也是函数的函数，可以称之为“函数的函数”。其目的是在不对现有函数进行修改的情况下，实现额外的功能。最基本的理念来自于一种被称为“装饰模式”的设计模式。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006cMbyIly1g79vi4kevog30ui0ltadr.gif">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006cMbyIly1g79wrt6bv4j30cf09pq2z.jpg">
-<meta property="og:updated_time" content="2019-09-28T04:39:51.919Z">
+<meta property="og:updated_time" content="2019-09-28T04:43:10.709Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python 之装饰器">
-<meta name="twitter:description" content="Python 之装饰器1. 概念介绍装饰器（decorator），又称“装饰函数”，即一种返回值也是函数的函数，可以称之为“函数的函数”。其目的是在不对现有函数进行修改的情况下，实现额外的功能。最基本的理念来自于一种被称为“装饰模式”的设计模式。 在 Python 中，装饰器属于纯粹的“语法糖”，不使用也没关系，但是使用的话能够大大简化代码，使代码更加易读——当然，是对知道这是怎么回事儿的人而言。">
+<meta name="twitter:description" content="Python 之装饰器1. 概念介绍装饰器（decorator），又称“装饰函数”，即一种返回值也是函数的函数，可以称之为“函数的函数”。其目的是在不对现有函数进行修改的情况下，实现额外的功能。最基本的理念来自于一种被称为“装饰模式”的设计模式。">
 <meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006cMbyIly1g79vi4kevog30ui0ltadr.gif">
   <link rel="canonical" href="http://lierchao.com/2019/09/28/Python-之装饰器/">
 
@@ -324,7 +324,7 @@
                 
               
 
-              <time title="创建时间：2019-09-28 12:38:37 / 修改时间：12:39:51" itemprop="dateCreated datePublished" datetime="2019-09-28T12:38:37+08:00">2019-09-28</time>
+              <time title="创建时间：2019-09-28 12:38:37 / 修改时间：12:43:10" itemprop="dateCreated datePublished" datetime="2019-09-28T12:38:37+08:00">2019-09-28</time>
             </span>
           
             
@@ -412,6 +412,7 @@
 
       
         <h1 id="Python-之装饰器"><a href="#Python-之装饰器" class="headerlink" title="Python 之装饰器"></a>Python 之装饰器</h1><h2 id="1-概念介绍"><a href="#1-概念介绍" class="headerlink" title="1. 概念介绍"></a>1. 概念介绍</h2><p><strong>装饰器</strong>（decorator），又称“装饰函数”，即一种返回值也是函数的函数，可以称之为“函数的函数”。其目的是在不对现有函数进行修改的情况下，实现额外的功能。最基本的理念来自于一种被称为“装饰模式”的设计模式。</p>
+<a id="more"></a>
 <p>在 Python 中，装饰器属于纯粹的“语法糖”，不使用也没关系，但是使用的话能够大大简化代码，使代码更加易读——当然，是对知道这是怎么回事儿的人而言。</p>
 <p>想必经过一段时间的学习，大概率已经在 Python 代码中见过<code>@</code>这个符号。没错，这个符号正是使用装饰器的标识，也是正经的 Python 语法。</p>
 <blockquote>
@@ -546,10 +547,6 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/09/28/Python 之装饰器/" rel="prev" title="">
-                   <i class="fa fa-chevron-right"></i>
-                </a>
-              
             </div>
           </div>
         
@@ -615,7 +612,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -760,14 +757,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">40k</span>
+    <span title="站点总字数">35k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">1:13</span>
+    <span title="站点阅读时长">1:04</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
