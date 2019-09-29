@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://lierchao.com/"/>
-  <updated>2019-09-29T00:04:59.181Z</updated>
+  <updated>2019-09-29T15:41:17.180Z</updated>
   <id>http://lierchao.com/</id>
   
   <author>
@@ -15,6 +15,43 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《深入理解计算机系统》读书笔记-05</title>
+    <link href="http://lierchao.com/2019/09/29/%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-05/"/>
+    <id>http://lierchao.com/2019/09/29/《深入理解计算机系统》读书笔记-05/</id>
+    <published>2019-09-29T15:40:33.000Z</published>
+    <updated>2019-09-29T15:41:17.180Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="《深入理解计算机系统》读书笔记-05"><a href="#《深入理解计算机系统》读书笔记-05" class="headerlink" title="《深入理解计算机系统》读书笔记-05"></a>《深入理解计算机系统》读书笔记-05</h1><h2 id="条件分支的两种实现方法"><a href="#条件分支的两种实现方法" class="headerlink" title="条件分支的两种实现方法"></a>条件分支的两种实现方法</h2><ol><li><p>控制的条件转移（条件控制）</p><p>通过直接改变控制流，来实现条件分支</p></li><li><p>数据的条件转移（条件传送）</p><p>通过对各分支无条件运算，根据条件选取结果，来实现条件分支</p><p>更符合现代处理器的性能特性，充分利用了处理器时间，避免由于空等或分支预测错误的惩罚造成处理器性能的浪费。但使用条件受限，要慎重使用。只有当各分支没有其他副作用时，才可考虑选择条件传送。</p></li></ol><a id="more"></a><h3 id="现代处理器的分支预测"><a href="#现代处理器的分支预测" class="headerlink" title="现代处理器的分支预测"></a>现代处理器的分支预测</h3><p>现代处理器使用分支预测逻辑来尝试预测每个分支可能的走向，这样就可以不用等待求出分支条件的具体结果，从而有效利用现代处理器的高性能。</p><p>预期的正确率是90%，但在复杂情况下，这一概率依旧很低。</p><p>一旦处理器做出预测，就会按照预测的走向继续往下执行指令，如果计算结果发现预测正确，就皆大欢喜；如果发现预测错误，则丢弃从分支入口处到当前时间点所做的全部与该分支有关的工作，从另一个分支入口重新开始计算。</p><p>这个丢弃行为所带来的时间损耗，即称为“<strong>分支预测错误的处罚</strong>”</p><h2 id="while-循环的两种翻译"><a href="#while-循环的两种翻译" class="headerlink" title="while 循环的两种翻译"></a>while 循环的两种翻译</h2><ol><li><p>调转到中间（jump to middle）</p><p>通过一个无条件跳转，直接跳转到测试条件相应的语句块，将<code>while</code>循环转换为<code>do-while</code>循环。</p></li><li><p>guarded-do</p><p>先测试条件，若不成立，直接跳过循环；若成立，则顺序往下执行，循环代码转换为<code>do-while</code>循环。</p></li></ol><h2 id="switch-语句使用跳转表"><a href="#switch-语句使用跳转表" class="headerlink" title="switch 语句使用跳转表"></a>switch 语句使用跳转表</h2><p>使用<code>switch</code>语句可以十分高效地实现跳转，在分支数目较多的情况下，能够节省大量对条件的计算时间，得到较高的运行效率。其中起到关键作用的就是被称为“<strong>跳转表</strong>（jump table）”的数据结构。</p><p>跳转表被实现为一个数组，数组中元素是代码段的地址。GCC 在 C 语言的基础上进行了扩展，可以通过结合使用两个取地址符<code>&amp;&amp;</code>和代码标号，直接获取代码段的地址。这一点需要知悉。</p><p>注意，switch 的开关变量<code>n</code>是<strong>整数</strong>。</p><h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>过程，即 C 语言中的函数（function），在其他语言中也称方法（method）、子例程（subroutine）、处理函数（handler）等。</p><p>过程具有三个属性或者说要素：</p><ol><li>传递控制</li><li>传递数据</li><li>分配和释放内存</li></ol><p>其中“传递控制”主要是指的对程序运行位置，即程序计数器值的压栈和出栈。</p><h3 id="必须要在内存中存放局部数据的常见情况"><a href="#必须要在内存中存放局部数据的常见情况" class="headerlink" title="必须要在内存中存放局部数据的常见情况"></a>必须要在内存中存放局部数据的常见情况</h3><ol><li>局部数据较多，只用寄存器不足以存放</li><li>对局部变量使用了取地址符<code>&amp;</code></li><li>有的局部变量是数组或是结构体，要能够通过数组或结构的访问方式进行访问</li></ol><p>其中第2、3两条说的其实是一个意思。二者都是因为必须要对局部变量产生一个“地址”，只有这样才能够符合 C 语言的语法标准；但是寄存器是不存在“地址”这个概念的，也不可能通过内存地址的方式进行索引，因此处理器必须要将这些存在“地址需求”的变量存储到内存中。</p><p>注意，栈指针<code>%rsp</code>所指为当前栈顶的低位字节，也就是说，在<strong>小端系统</strong>中，假如栈顶存储了一个 8 字节内容，则该内容的最低位字节（从右往左第0~7位）的内存地址就是<code>%rsp</code>的内容，而次低位字节（第8~15位）则存储在<code>1(%rsp)</code>，也就是<code>%rsp+1</code>的地址上，以此类推，最高位字节（第56~63位）才应保存在<code>7(rsp)</code>的地址上。而<code>8(%rsp)</code>所指的又是上一个入栈的元素的低位字节了。</p><h3 id="寄存器中值的保存"><a href="#寄存器中值的保存" class="headerlink" title="寄存器中值的保存"></a>寄存器中值的保存</h3><blockquote><p>寄存器组是唯一被所有过程共享的资源</p></blockquote><h3 id="被调用者保存的寄存器"><a href="#被调用者保存的寄存器" class="headerlink" title="被调用者保存的寄存器"></a>被调用者保存的寄存器</h3><p>16 个通用寄存器中，<code>%rbx</code>、<code>%rbp</code>、<code>%r12</code>、<code>%r13</code>、<code>%r14</code>、<code>%r15</code>共计 6 个寄存器，被划分为“被调用者保存”寄存器。所谓“被调用者保存”，指的是“被调用”地过程有责任维护好调用发生当时，这些中存在的值。</p><p>维护的方式有两种：</p><ol><li>不使用相应寄存器</li><li>在使用相应寄存器之前，将其储存的值入栈</li></ol><p>这两种方式只需择一即可，也就是说，只有需要用到的寄存器才被入栈，如果在整个过程中不需要使用某些寄存器，也就不需要将其入栈。</p><h3 id="调用者保存的寄存器"><a href="#调用者保存的寄存器" class="headerlink" title="调用者保存的寄存器"></a>调用者保存的寄存器</h3><p>除栈指针<code>%rsp</code>外，其他所有通用寄存器均为“调用者保存”寄存器。</p><blockquote><p>此处暂时存疑，不知道是仅限于通用寄存器还是所有寄存器。按逻辑来说，应该是仅限于通用寄存器，但书上表述不太严谨。</p></blockquote><p>这些寄存器包括：<code>%rax</code>、<code>%rcx</code>、<code>%rdx</code>、<code>%rsi</code>、<code>%rdi</code>、<code>%r8</code>、<code>%r9</code>、<code>%r10</code>、<code>%r11</code>，共计 9 个通用寄存器。对应用法见下表。</p><div class="table-container"><table><thead><tr><th style="text-align:center">寄存器</th><th style="text-align:center">用法</th></tr></thead><tbody><tr><td style="text-align:center"><code>%rax</code></td><td style="text-align:center">返回值</td></tr><tr><td style="text-align:center"><code>%rcx</code></td><td style="text-align:center">第 4 个参数</td></tr><tr><td style="text-align:center"><code>%rdx</code></td><td style="text-align:center">第 3 个参数</td></tr><tr><td style="text-align:center"><code>%rsi</code></td><td style="text-align:center">第 2 个参数</td></tr><tr><td style="text-align:center"><code>%rdi</code></td><td style="text-align:center">第 1 个参数</td></tr><tr><td style="text-align:center"><code>%r8</code></td><td style="text-align:center">第 5 个参数</td></tr><tr><td style="text-align:center"><code>%r9</code></td><td style="text-align:center">第 6 个参数</td></tr><tr><td style="text-align:center"><code>%r10</code></td><td style="text-align:center">调用者保存</td></tr><tr><td style="text-align:center"><code>%r11</code></td><td style="text-align:center">调用者保存</td></tr></tbody></table></div><p>所谓“调用者保存”，也就是说被调用的过程对这些寄存器中的值不负任何责任，所有有用值的保存和恢复，即入栈和出栈操作，都是调用者（或者说主调函数）的责任，在调用其他过程之前，就必须自行保存好上述寄存器中的值，以免被所调用的过程覆盖重写。</p><h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>站在机器的视角来看，递归调用和一般的调用没有什么区别。每次调用都产生一个独立的存储空间，用来保存每次调用所需的各种状态信息。</p><p>递归在机器层面是一个很自然的过程。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;《深入理解计算机系统》读书笔记-05&quot;&gt;&lt;a href=&quot;#《深入理解计算机系统》读书笔记-05&quot; class=&quot;headerlink&quot; title=&quot;《深入理解计算机系统》读书笔记-05&quot;&gt;&lt;/a&gt;《深入理解计算机系统》读书笔记-05&lt;/h1&gt;&lt;h2 id=&quot;条件分支的两种实现方法&quot;&gt;&lt;a href=&quot;#条件分支的两种实现方法&quot; class=&quot;headerlink&quot; title=&quot;条件分支的两种实现方法&quot;&gt;&lt;/a&gt;条件分支的两种实现方法&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;控制的条件转移（条件控制）&lt;/p&gt;
+&lt;p&gt;通过直接改变控制流，来实现条件分支&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;数据的条件转移（条件传送）&lt;/p&gt;
+&lt;p&gt;通过对各分支无条件运算，根据条件选取结果，来实现条件分支&lt;/p&gt;
+&lt;p&gt;更符合现代处理器的性能特性，充分利用了处理器时间，避免由于空等或分支预测错误的惩罚造成处理器性能的浪费。但使用条件受限，要慎重使用。只有当各分支没有其他副作用时，才可考虑选择条件传送。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+      <category term="计算机" scheme="http://lierchao.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+      <category term="基础知识" scheme="http://lierchao.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+      <category term="读书笔记" scheme="http://lierchao.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="读书笔记" scheme="http://lierchao.com/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="计算机基础知识" scheme="http://lierchao.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    
+  </entry>
   
   <entry>
     <title>Python 之装饰器</title>
@@ -580,37 +617,6 @@
       
       
         &lt;p&gt;抬眼望，逆乱间，匆匆亘古，不为红颜。&lt;br&gt;古风长存在世间。&lt;br&gt;腾龙出海，一世万年，轮回百世洪荒前。&lt;br&gt;逝者恩怨幻如烟。&lt;br&gt;虎落平阳，龙游浅滩，一日声震宇寰。&lt;br&gt;月明无恨月常圆。&lt;br&gt;帝睨天下，一往无前，枪林弹雨风拂面！&lt;br&gt;哪怕身死亦无怨，但求心安。&lt;
-      
-    
-    </summary>
-    
-    
-      <category term="轩辕诗集" scheme="http://lierchao.com/categories/%E8%BD%A9%E8%BE%95%E8%AF%97%E9%9B%86/"/>
-    
-    
-      <category term="文学" scheme="http://lierchao.com/tags/%E6%96%87%E5%AD%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>悲中调</title>
-    <link href="http://lierchao.com/2010/10/15/%E6%82%B2%E4%B8%AD%E8%B0%83/"/>
-    <id>http://lierchao.com/2010/10/15/悲中调/</id>
-    <published>2010-10-15T11:11:02.000Z</published>
-    <updated>2019-09-07T05:33:16.115Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>本因一次数学课上遇一难解例题而于2010年1月左右作原稿，原稿失后，于2010年10月11日（进入初二后首次月考之数学考试期间）复作此</p></blockquote><center>黄沙云，</center><center>不尽地，</center><center>阴霾天气。</center><center>例题难倒英雄计，</center><center>岁月知几？</center><center>人生前途渺茫，</center><center>难觅踪迹。</center><center>悲叹天下豪杰并起，</center><center>阅题万千无济，</center><center>甘居人后何所易？</center><p><br></p><center>生死幻灭，</center><center>一场游戏。</center><center>北冥之鲲，</center><center>振翅尚且飞渡天地，</center><center>终难望矣！</center><center>闲云野鹤，</center><center>莫谈孤寂，</center><center>总有高远志。</center><center>会有一时，</center><center>平步青云八万里，</center><center>扶摇直上，</center><center>当以光年计！</center>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;本因一次数学课上遇一难解例题而于2010年1月左右作原稿，原稿失后，于2010年10月11日（进入初二后首次月考之数学考试期间）复作此&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;center&gt;黄沙云，&lt;/center&gt;
-
-&lt;center&gt;不尽地，&lt;/c
       
     
     </summary>
